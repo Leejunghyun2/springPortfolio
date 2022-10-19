@@ -1,0 +1,39 @@
+package com.LJH.springPortfolio.shopMall.model.dao;
+
+import java.util.List;
+
+import com.LJH.springPortfolio.shopMall.model.dto.CartDTO;
+
+public class CartDaoImpl implements CartDAO {
+
+	@Override
+	public List<CartDTO> getSelectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartDTO getSelectOne(CartDTO paramDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int setInsert(CartDTO paramDto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setUpdate(CartDTO paramDto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setDelete(CartDTO paramDto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

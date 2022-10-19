@@ -1,0 +1,36 @@
+package com.LJH.springPortfolio.shopMall.controller;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.LJH.springPortfolio.shopMall.model.dao.CartDAO;
+
+@Controller
+@RequestMapping("/shopCart")
+public class ShopCartController {
+
+	@Inject
+	CartDAO dao;
+	
+	String folderName= "shopCart";
+	
+	@RequestMapping("/list")
+	public String list(Model model) {
+		String fileName = "list";
+		String title = "장바구니";
+		
+		model.addAttribute("folderName",folderName);
+		model.addAttribute("fileName",fileName);
+		model.addAttribute("title",title);
+		return "main/main";
+	}
+	
+	@RequestMapping("/sakjeProc")
+	public String sakjeProc(Model model) {
+		
+		return "main/main";
+	}
+}

@@ -1,0 +1,4 @@
+127.0.0.1 - - [06/Oct/2022:21:02:10 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [06/Oct/2022:21:02:12 +0900] "GET /springPortfolio/ HTTP/1.1" 200 2243
+0:0:0:0:0:0:0:1 - - [06/Oct/2022:21:02:26 +0900] "GET /springPortfolio/member/list HTTP/1.1" 200 4186
+0:0:0:0:0:0:0:1 - - [06/Oct/2022:21:02:28 +0900] "GET /springPortfolio/board/list HTTP/1.1" 200 4386

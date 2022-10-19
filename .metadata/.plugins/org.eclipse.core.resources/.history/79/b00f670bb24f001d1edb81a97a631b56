@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+private int memberNo;
+	private String memberNo_;
+	
+	private int productCode;
+	private String productCode_;
+	
+	private int amount;
+	private Date regiDate;
+	
+	private String productInfo;
+	
+	private int sumPrice;
+
+ -->
+<mapper namespace="cart">
+<select id=""></select>
+
+<select id="getSelectAll" resultType="com.LJH.springPortfolio.shopMall.model.dto.CartDTO">
+	select c.* , (select productName || '/' || productPrice || '/' || (select vendorName from vendor V where p.vendorCode = V.vendorCode ) || '/' || attachInfo  from product p where p.productCode = c.productCode)
+	from cart c
+	order by cartNo desc
+</select>
+<insert id="setInsert">
+	insert into cart
+	values(seq_cart.nextval, #{memberNo}, #{productCode}, #{amount}, sysdate)
+</insert>
+
+</mapper>

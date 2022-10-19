@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<h2>${title }</h2>
+<%@ include file="../_include/inc_header.jsp" %>
+<table border="1">
+	<tr>
+		<th><input type="checkbox" name="checkAll" id="checkAll"></th>
+		<th>cartNo</th>
+		<th>memberNo</th>
+		<th>ProductInfo</th>
+		<th>regiDate</th>
+	</tr>
+	<c:forEach var="dto" items="${list }">
+		<tr>
+			<td><input type="checkbox" name="chk" value="${dto.cartNo }" align="center"></td>
+			<td>${dto.cartNo}</td>
+			<td>${dto.memberNo}</td>
+			<td>${dto.productInfo}</td>
+			<td>${dto.regiDate}</td>
+		</tr>
+	</c:forEach>
+</table>
+<script>
+$(function(){
+	$("#checkAll").click(function(){
+		if($("#checkAll").prop("checked")){
+			$("input[name=chk]").prop("checked",true);
+		} else{
+			$("input[name=chk]").prop("checked",false);
+		}
+	});
+})//한번에 체크
+</script>

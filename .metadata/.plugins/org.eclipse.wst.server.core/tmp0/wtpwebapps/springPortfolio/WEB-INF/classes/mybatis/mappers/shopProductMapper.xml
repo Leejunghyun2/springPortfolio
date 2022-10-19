@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+ 	<select id="getSelectAll" resultType="com.LJH.springPortfolio.shopMall.model.dto.ProductDTO">
+ 		select P.*, (select vendorName from vendor V where P.vendorCode = V.vendorCode ) vendorName 
+ 		from product P 
+ 		order by productCode desc
+ 	</select>
+ 	<select id="getSelectOne" resultType="com.LJH.springPortfolio.shopMall.model.dto.ProductDTO">
+ 		select P.*, (select vendorName from vendor V where P.vendorCode = V.vendorCode ) vendorName 
+ 		from product P 
+ 		where P.productCode = #{productCode}
+ 	</select>
+	<insert id="setInsert">
+		insert into product values(
+			seq_product.nextval, #{productName}, #{productPrice}, #{vendorCode}, #{attachInfo}, sysdate
+		)
+	</insert>
+	<update id="setUpdate">
+		update product set productName = #{productName}, productPrice = #{productPrice}, vendorCode = #{vendorCode},
+		attachInfo = #{attachInfo}
+		where productCode = #{productCode}
+	</update>
+	<delete id="setDelete">
+		delete from product 
+		where productCode = #{productCode}
+	</delete>
+</mapper>

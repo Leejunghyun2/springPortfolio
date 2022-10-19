@@ -1,0 +1,5 @@
+package com.LJH.springPortfolio.shopMall.model.dto;
+
+public class CartDTO {
+
+}

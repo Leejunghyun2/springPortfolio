@@ -1,0 +1,96 @@
+package com.LJH.springPortfolio.shopMall.model.dto;
+
+import java.sql.Date;
+
+import com.LJH.springPortfolio._common.Util;
+
+public class CartDTO {
+	private int cartNo;
+	private String cartNo_;
+	
+	private int memberNo;
+	private String memberNo_;
+	
+	private int productCode;
+	private String productCode_;
+	
+	private int amount;
+	private Date regiDate;
+	
+	private String productInfo;
+	
+	
+	Util util = new Util();
+	public int getCartNo() {
+		return cartNo;
+	}
+
+	public void setCartNo(int cartNo) {
+		this.cartNo = cartNo;
+	}
+
+	public String getCartNo_() {
+		return cartNo_;
+	}
+
+	public void setCartNo_(String cartNo_) {
+		this.cartNo_ = util.getNumberCheck(cartNo_, 0) + "";
+		this.cartNo = util.getNumberCheck(cartNo_, 0);
+	}
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public String getMemberNo_() {
+		return memberNo_;
+	}
+
+	public void setMemberNo_(String memberNo_) {
+		this.memberNo_ = memberNo_;
+	}
+
+	public int getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(int productCode) {
+		this.productCode = productCode;
+	}
+
+	public String getProductCode_() {
+		return productCode_;
+	}
+
+	public void setProductCode_(String productCode_) {
+		this.productCode_ = productCode_;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public Date getRegiDate() {
+		return regiDate;
+	}
+
+	public void setRegiDate(Date regiDate) {
+		this.regiDate = regiDate;
+	}
+
+	public String getProductInfo() {
+		return productInfo;
+	}
+
+	public void setProductInfo(String productInfo) {
+		this.productInfo = productInfo;
+	}
+}

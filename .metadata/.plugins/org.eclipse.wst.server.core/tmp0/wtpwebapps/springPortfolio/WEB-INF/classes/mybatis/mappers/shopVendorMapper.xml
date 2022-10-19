@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vendor">
+ 	<select id="getSelectAll" resultType="com.LJH.springPortfolio.shopMall.model.dto.VendorDTO">
+ 		select * from vendor order by vendorCode desc
+ 	</select>
+ 	<select id="getSelectOne" resultType="com.LJH.springPortfolio.shopMall.model.dto.VendorDTO">
+ 		select * from vendor where vendorCode = #{vendorCode} order by vendorCode desc
+ 	</select>
+	<insert id="setInsert">
+		insert into vendor values(seq_vendor.nextval, #{vendorName}, sysdate)
+	</insert>
+	<update id="setUpdate">
+		update vendor set vendorName = #{vendorName} where vendorCode = #{vendorCode}
+	</update>
+	<delete id="setDelete">
+		delete from vendor where vendorCode = #{vendorCode}
+	</delete>
+</mapper>
