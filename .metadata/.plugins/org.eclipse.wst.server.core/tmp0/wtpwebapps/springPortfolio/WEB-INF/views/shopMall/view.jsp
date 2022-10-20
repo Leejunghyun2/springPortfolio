@@ -63,14 +63,14 @@
 </table>
 <form name="imsiForm">
 <input type="hidden" name="productCode_" value="${productDto.productCode }">
-<input type="hidden" name="amount_">
+<input type="hidden" name="amount">
 </form>
 
 <script>
 function btnProc(val1){
 	if(val1 == 'saveCart'){
 		if(confirm('장바구니에 담으시겠습니까?'))
-		document.imsiForm.amount_.value = document.getElementById("jumunSu").value; 
+		document.imsiForm.amount.value = document.getElementById("jumunSu").value; 
 		document.imsiForm.action = "${path}/shopCart/chugaProc";
 		document.imsiForm.method = "post";
 		document.imsiForm.submit();

@@ -2,13 +2,19 @@
     pageEncoding="UTF-8"%>
 <h2>${title }</h2>
 <%@ include file="../_include/inc_header.jsp" %>
-<table border="1">
+
+<%-- 총 합계금액을 구하기위한 변수선언 --%>
+<c:set var="sum" value="0"></c:set>
+<form name="chkForm">
+<table border="1" width="80%">
 	<tr>
 		<th><input type="checkbox" name="checkAll" id="checkAll"></th>
-		<th>상품</th>
-		<th>cartNo</th>
-		<th>memberNo</th>
-		<th>ProductInfo</th>
+		<th>상품이미지</th>
+		<th>상품명</th>
+		<th>제조사</th>
+		<th>상품가격</th>
+		<th>상품수량</th>
+		<th>합계</th>
 		<th>regiDate</th>
 	</tr>
 	<c:forEach var="dto" items="${list }">
@@ -39,13 +45,31 @@
 					</c:otherwise>
 				</c:choose>
 			</td>
-			<td>${dto.cartNo}</td>
-			<td>${dto.memberNo}</td>
-			<td>${dto.productInfo}</td>
+			<c:set var="productInfoArray" value="${fn:split(dto.productInfo, '/') }"></c:set>
+			<td>${productInfoArray[0]}</td>
+			<td>${productInfoArray[2]}</td>
+			
+			<td>${productInfoArray[1]}</td><%-- 1개당 가격 --%>
+			<td>${dto.amount }</td>
+			<td>${productInfoArray[1] * dto.amount }원</td>
+			<c:set var="sum" value="${sum + (productInfoArray[1] * dto.amount) }"></c:set>
+			
 			<td>${dto.regiDate}</td>
+			
 		</tr>
 	</c:forEach>
+		<tr>
+			<td colspan="8" align="right">총합계금액: ${sum } 원</td>
+		</tr>
 </table>
+<div style="border: 0px solid red; padding-top: 20px; width: 80%;" align="right">
+		|
+		<a href="#" onclick="location.href='${path}/shopMall/list';">장보러가기</a>
+		|
+		<a href="#" onclick="cartClearForm();">삭제</a>
+		|
+</div>	
+	</form>
 <script>
 $(function(){
 	$("#checkAll").click(function(){
@@ -56,4 +80,11 @@ $(function(){
 		}
 	});
 })//한번에 체크
+function cartClearForm(){
+	if(confirm('삭제할까요?')){
+		document.chkForm.action = "${path}/shopCart/sakjeProc";
+		document.chkForm.method = "post";
+		document.chkForm.submit(); 
+	}
+}
 </script>

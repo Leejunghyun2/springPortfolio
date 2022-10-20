@@ -31,4 +31,9 @@ private int memberNo;
 	values(seq_cart.nextval, #{memberNo}, #{productCode}, #{amount}, sysdate)
 </insert>
 
+<delete id="setDelete">
+	delete from cart where cartNo = #{cartNo}
+</delete>
+
+
 </mapper>

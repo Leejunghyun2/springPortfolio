@@ -21,7 +21,7 @@
 	</tr>
 	<tr>
 		<td>작성자</td>
-		<td><input type="text" name="writer"></td>
+		<td><input type="text" name="writer" value="${sessionScope.sessionName }"></td>
 	</tr>
 	<tr>
 		<td>이메일</td>

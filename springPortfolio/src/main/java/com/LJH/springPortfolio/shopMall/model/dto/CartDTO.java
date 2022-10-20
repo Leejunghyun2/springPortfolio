@@ -5,6 +5,7 @@ import java.sql.Date;
 import com.LJH.springPortfolio._common.Util;
 
 public class CartDTO {
+	Util util = new Util();	
 	private int cartNo;
 	private String cartNo_;
 	
@@ -47,7 +48,6 @@ public class CartDTO {
 		this.sumPrice = sumPrice;
 	}
 
-	Util util = new Util();
 	public int getCartNo() {
 		return cartNo;
 	}
@@ -104,7 +104,7 @@ public class CartDTO {
 	}
 
 	public void setAmount(int amount) {
-		this.amount = amount;
+		this.amount = util.getNumberCheck(amount + "", 0);
 	}
 
 	public Date getRegiDate() {
