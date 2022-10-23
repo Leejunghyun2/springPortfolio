@@ -252,4 +252,56 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
+	
+	
+	
+	
+	//ajax Test용
+	
+	@RequestMapping("/list1")
+	public String list1(
+			Model model,
+			MemberDTO dto
+		) {
+		
+		String fileName = "list";
+		String title = "회원목록";
+		int pageNumber = util.getNumberCheck(dto.getPageNumber_(),1);
+		
+		int pageSize = 2;
+		int blockSize = 5;
+
+
+
+		int totalRecord = dao.getTotalRecord(dto);
+		int block = (pageNumber - 1) / blockSize;
+		int jj = totalRecord - pageSize * (pageNumber - 1);
+
+		double totalPageDou = Math.ceil(totalRecord / (double) pageSize);
+		int totalPage = (int) totalPageDou;
+
+		int startRecord = pageSize * (pageNumber - 1) + 1;
+		int lastRecord = pageSize * pageNumber;
+		int totalBlock = totalPage / blockSize;
+		
+		dto.setStartRecord(startRecord);
+		dto.setLastRecord(lastRecord);
+		
+		List<MemberDTO> list = dao.getSelectAll(dto); 
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("totalRecord", totalRecord);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNumber", pageNumber);
+		model.addAttribute("blockSize", blockSize);
+		model.addAttribute("block", block);
+		model.addAttribute("jj", jj);
+		
+		model.addAttribute("title",title);
+		model.addAttribute("list",list);
+		model.addAttribute("fileName", fileName);
+		model.addAttribute("folderName", folderName);
+		model.addAttribute("dto",dto);
+		return "member/list";
+	}
+	
 }

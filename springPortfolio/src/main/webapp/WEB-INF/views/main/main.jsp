@@ -13,17 +13,38 @@
 	<tr>
 		<td style="padding:20px 20px;">
 		<%@ include file="../_include/inc_menu.jsp" %>
+		</td>
 	</tr>
 	<tr>
-		<td style="padding:20px 20px;" align="center">
-		<jsp:include page="../${folderName }/${fileName }.jsp"/>
+		<%--<td style="padding:20px 20px;" align="center" id="resultTd">--%>
+		 <td align="center"><jsp:include page="../${folderName }/${fileName }.jsp"/></td>
 	</tr>
 	<tr>
 		<td style="padding:20px 20px;" align="center">
 		<jsp:include page="../_include/inc_bottom.jsp"/>
+		</td>
 	</tr>
 </table>
-<div id="result">
-</div>
+<%-- ajax 테스트용 
+<script>
+function moveUrl(val1,val2){
+		$.ajax({
+	type	: "POST",
+	url	    : '${path}/' + val1 + '/' + val2,
+	data	: {	
+	},
+	
+	success : function(result) {
+		page = val1;
+		//update board fromd data
+		$("#resultTd").html(result);
+	},
+	error : function(e) {
+	console.log(e);
+	}
+});
+}
+</script>
+--%>
 </body>
 </html>

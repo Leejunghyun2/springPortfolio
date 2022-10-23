@@ -21,7 +21,8 @@
 			<a href="${path }">[HOME]</a>
 		</td>
 		<td style="padding: 0px 10px;" id="member">
-			<a href="${path }/member/list">회원관리</a>
+			<a href="${path }/member/list" >회원관리</a>
+			<%-- <a href="#" onclick="moveUrl('member','list1');">회원관리</a>--%>
 		</td>
 		<td style="padding: 0px 10px;" id="board">
 			<a href="${path }/board/list" >전체게시판</a>
@@ -58,6 +59,8 @@
 	</c:otherwise>
 </c:choose>
 <script>
+
+
 function choiceMenuId(){
 	$("#${choice}").css('background-color','gray');
 }

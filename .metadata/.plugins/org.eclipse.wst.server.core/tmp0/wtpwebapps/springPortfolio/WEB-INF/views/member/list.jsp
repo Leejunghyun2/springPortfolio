@@ -118,9 +118,6 @@
 	</div>
 </c:if>
 <script>
-	
-	
-	
 	function search() {
 	    document.searchForm.action="${path}/member/search";
 	    document.searchForm.method="post";

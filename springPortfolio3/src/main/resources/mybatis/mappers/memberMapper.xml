@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+<!-- include -->
+	<sql id="search">
+	<choose>
+			<when test="searchGubun == 'id_name'">
+				and (id like '%' || #{searchData} || '%' or name like '%' || #{searchData} || '%' )
+			</when>
+			<when test="searchGubun != null and searchGubun != '' and searchData != null and searchData != ''">
+				and (${searchGubun} like '%' || #{searchData} || '%')
+			</when>
+			<otherwise>
+				
+			</otherwise>
+		</choose>
+	</sql>
+
+<!-- selectList -->
+	<select id="getSelectAll" resultType="com.LJH.springPortfolio.member.model.dto.MemberDTO">
+		select * from (select A.*, Rownum rnum from (
+			
+		select * from member where 1 = 1
+		<include refid="search"></include>
+	<![CDATA[	
+			order by no desc
+		) A) where rnum >= #{startRecord} and rnum <= #{lastRecord}
+	]]>
+	</select>
+<!-- selectOne -->
+	<select id="getTotalRecord" resultType="int">
+		select count(*) from member where 1 = 1
+		<include refid="search"></include>
+			
+		
+	</select>
+	
+	<select id="getSelectOne" resultType="com.LJH.springPortfolio.member.model.dto.MemberDTO">
+	
+			
+			 select * from(select m.*, LAG(no) OVER (order by no desc) preNo,LAG(name) over (order by no desc) preName,
+			LEAD(no) OVER (order by no desc) nxtNo, LEAD(name) over (order by no desc) nxtName 
+			from member m where 1 = 1  
+			<include refid="search"></include>
+			order by no desc)
+			where no = #{no}
+	</select>
+	
+<!-- insert -->
+	<insert id="setInsert">
+		insert into member values(
+		seq_member.nextval, #{id}, #{passwd}, #{name}, #{jumin1}, #{jumin2}, #{phone1}, #{phone2}, #{phone3}, #{email1}, #{email2}, #{postcode}, #{address}, #{detailAddress},
+		#{extraAddress}, sysdate
+		)
+	</insert>
+	
+	<delete id="setDelete">
+		delete from member where no = #{no} and passwd = #{passwd}
+	</delete>
+	
+	<update id="setUpdate">
+		update member set phone1 = #{phone1}, phone2 = #{phone2}, phone3 = #{phone3},
+		email1 = #{email1}, email2 = #{email2},
+		postcode = #{postcode}, address = #{address}, detailAddress = #{detailAddress}, extraAddress = #{extraAddress}
+		where no = #{no} and passwd = #{passwd}
+	</update>
+	
+	
+	<select id="getLogin" resultType="com.LJH.springPortfolio.member.model.dto.MemberDTO">
+		select no, name, email1, email2 from member where id = #{id} and passwd = #{passwd}
+	</select>
+</mapper>

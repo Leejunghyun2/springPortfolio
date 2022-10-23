@@ -35,3 +35,7 @@
 10월 23, 2022 15:10:44.81 [7924:5080:1023/151044.081:ERROR:device_event_log_impl.cc(214)] [15:10:44.080] USB: usb_device_handle_win.cc:1048 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
 10월 23, 2022 15:11:39.06 [7924:9452:1023/151139.005:ERROR:util.cc(129)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
 10월 23, 2022 15:34:51.761 [7924:5080:1023/153451.761:ERROR:interface_endpoint_client.cc(689)] Message 1 rejected by interface blink.mojom.WidgetHost
+10월 23, 2022 16:06:11.231 [7924:5080:1023/160611.231:ERROR:CONSOLE(1)] "Uncaught (in promise) RangeError: Invalid line number 51 in 1-line document", source: devtools://devtools/bundled/devtools-frontend/front_end/third_party/codemirror.next/chunk/codemirror.js (1)
+10월 23, 2022 16:09:07.223 [7924:5080:1023/160907.222:ERROR:CONSOLE(1)] "Uncaught (in promise) RangeError: Invalid line number 51 in 1-line document", source: devtools://devtools/bundled/devtools-frontend/front_end/third_party/codemirror.next/chunk/codemirror.js (1)
+10월 23, 2022 16:41:07.91 [7924:5080:1023/164107.091:ERROR:interface_endpoint_client.cc(689)] Message 0 rejected by interface blink.mojom.WidgetHost
+10월 23, 2022 17:49:21.38 [7924:5080:1023/174921.038:ERROR:CONSOLE(1)] "Uncaught (in promise) RangeError: Invalid line number 49 in 1-line document", source: devtools://devtools/bundled/devtools-frontend/front_end/third_party/codemirror.next/chunk/codemirror.js (1)

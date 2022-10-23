@@ -155,7 +155,9 @@
 		
 	  <Context docBase="C:\LJH\workspace\springPortfolio\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\LJH\attach" path="/springStudy/attach" reloadable="true"/>
       <Context docBase="C:\LJH\attach" path="/springPortfolio/attach" reloadable="true"/>	
+      <Context docBase="C:\LJH\attach" path="/springPortfolio3/attach" reloadable="true"/>	
       <Context docBase="C:\LJH\workspace\springPortfolio\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\springPortfolio" path="/springPortfolio" reloadable="true" source="org.eclipse.jst.jee.server:springPortfolio"/>
+      <Context docBase="C:\LJH\workspace\springPortfolio\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\springPortfolio3" path="/springPortfolio3" reloadable="true" source="org.eclipse.jst.jee.server:springPortfolio"/>
       </Host>
     </Engine>
   </Service>

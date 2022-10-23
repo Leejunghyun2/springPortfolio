@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+<sql id="search">
+	<choose>
+			<when test="searchGubun == 'writer_subject_content'">
+				and (writer like '%' || #{searchData} || '%' or subject like '%' || #{searchData} || '%' or content like '%' || #{searchData} || '%')
+			</when>
+			<when test="searchGubun != null and searchGubun != '' and searchData != null and searchData != ''">
+				and (${searchGubun} like '%' || #{searchData} || '%')
+			</when>
+			<otherwise>
+			
+			</otherwise>
+		</choose>
+</sql>
+<sql id="tblSearch">
+</sql>
+
+	<select id="getSelectAll" resultType="com.LJH.springPortfolio.board.model.dto.BoardDTO">
+		select * from (select A.*, rownum rnum,(select t.tblName from boardTbl t where t.tbl=A.tbl) tblName from(
+		select * from board where 1 = 1
+		<choose>
+			<when test="tbl != null and tbl != ''">
+				and (tbl = #{tbl} or noticeNo > 0)
+			</when>
+			<otherwise>
+				
+			</otherwise>
+		</choose>
+		
+		<include refid="search"></include>
+		order by noticeNo desc, refNo desc, levelNo asc
+		<![CDATA[	
+		) A) where rnum >= #{startRecord} and rnum <= #{lastRecord}
+		]]>
+	</select>
+	
+	<select id="getSelectOne" resultType="com.LJH.springPortfolio.board.model.dto.BoardDTO">
+			 select * from(select b.*, LAG(no) OVER (order by no desc) preNo,LAG(subject) over (order by no desc) preSubject,
+			LEAD(no) OVER (order by no desc) nxtNo, LEAD(subject) over (order by no desc) nxtSubject,
+			(select t.tblName from boardTbl t where t.tbl=b.tbl) tblName 
+			from board b where 1 = 1
+		<choose>
+			<when test="tbl != null and tbl != ''">
+				and tbl = #{tbl}
+			</when>
+			<otherwise>
+				
+			</otherwise>
+		</choose>
+			<include refid="search"></include>
+			order by no desc)
+			where no = #{no}
+	
+	</select>
+	<select id="getTotalRecord" resultType="int">
+		select count(*) from board where 1 = 1
+		<choose>
+			<when test="tbl != null and tbl != ''">
+				and tbl = #{tbl}
+			</when>
+			<otherwise>
+				
+			</otherwise>
+		</choose> 
+		<include refid="search"></include>
+	</select>
+	<insert id="setInsert">
+		insert into board 
+		values(
+		seq_board.nextval, #{num}, #{tbl}, #{writer}, #{subject}, #{content}, #{email}, #{passwd},
+		#{refNo}, #{stepNo}, #{levelNo}, #{parentNo}, #{hit}, #{ip}, #{memberNo}, #{noticeNo},
+		#{secretGubun}, sysdate, #{attachInfo}
+		)
+	</insert>
+	<update id="setUpdate">
+		update board set writer = #{writer}, email = #{email}, subject = #{subject}, content = #{content}, noticeNo = #{noticeNo} , secretGubun = #{secretGubun}
+		where no = #{no} and passwd = #{passwd}
+	</update>
+	
+	<update id="setUpdateReLevelNo">
+		update board set levelNo = (levelNo + 1) where refNo = #{refNo} and levelNo > #{levelNo}
+	</update>
+	
+	<update id="setUpdateHit">
+		update board set hit = (hit + 1) where no = #{no} 
+	</update>
+	
+	<delete id="setDelete">
+		delete from board
+		where no = #{no} and passwd = #{passwd}
+	</delete>
+	
+	
+	<select id="getMaxValue" resultType="int">
+		select nvl(max(${field}),0) from board
+	</select>
+	
+</mapper>

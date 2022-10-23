@@ -155,7 +155,9 @@
 		
 	  <Context docBase="C:\LJH\attach" path="/springStudy/attach" reloadable="true"/>
       <Context docBase="C:\LJH\attach" path="/springPortfolio/attach" reloadable="true"/>	
+      <Context docBase="C:\LJH\attach" path="/springPortfolio3/attach" reloadable="true"/>	
       <Context docBase="springPortfolio" path="/springPortfolio" reloadable="true" source="org.eclipse.jst.jee.server:springPortfolio"/>
+      <Context docBase="springPortfolio3" path="/springPortfolio3" reloadable="true" source="org.eclipse.jst.jee.server:springPortfolio"/>
       </Host>
     </Engine>
   </Service>
