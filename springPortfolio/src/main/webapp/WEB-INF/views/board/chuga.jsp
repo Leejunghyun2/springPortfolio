@@ -7,7 +7,7 @@
 <input type="hidden" name="searchGubun" value="${dto.searchGubun }">
 <input type="hidden" name="searchData" value="${dto.searchData }">
 <input type="hidden" name="pageNumber_" value="1">
-<input type="text" value="${dto.tbl }">
+<input type="hidden" value="${dto.tbl }">
 <table border="1" width="80%">
 	<tr>
 		<td>게시판종류</td>
@@ -25,7 +25,7 @@
 	</tr>
 	<tr>
 		<td>이메일</td>
-		<td><input type="text" name="email"></td>
+		<td><input type="text" name="email" value="${sessionScope.sessionEmail }"></td>
 	</tr>
 	<tr>
 		<td>비밀번호</td>

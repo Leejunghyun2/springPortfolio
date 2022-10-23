@@ -37,7 +37,7 @@ public class MemberController {
 		String title = "회원목록";
 		int pageNumber = util.getNumberCheck(dto.getPageNumber_(),1);
 		
-		int pageSize = 1;
+		int pageSize = 2;
 		int blockSize = 5;
 
 
@@ -234,6 +234,7 @@ public class MemberController {
 		if(dto.getNo() > 0) {
 			session.setAttribute("sessionNo", dto.getNo());
 			session.setAttribute("sessionName", dto.getName());
+			session.setAttribute("sessionEmail", dto.getEmail1()+"@"+dto.getEmail2());
 			return "redirect:/member/list";
 		} else {
 			return "redirect:/member/login";

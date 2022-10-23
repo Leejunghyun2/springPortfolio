@@ -26,8 +26,84 @@ public class ProductDTO {
 		private MultipartFile file_2;
 		private MultipartFile file_0;
 		
+		private int startRecord;
+		private int lastRecord;
 		
-	
+		private int pageNumber;
+		private String pageNumber_;
+		
+		private String searchGubun;
+		private String searchData;
+		
+		
+		private String searchQuery;
+		
+		
+		public int getStartRecord() {
+			return startRecord;
+		}
+		public void setStartRecord(int startRecord) {
+			this.startRecord = startRecord;
+		}
+		public int getLastRecord() {
+			return lastRecord;
+		}
+		public void setLastRecord(int lastRecord) {
+			this.lastRecord = lastRecord;
+		}
+		public int getPageNumber() {
+			return pageNumber;
+		}
+		public void setPageNumber(int pageNumber) {
+			this.pageNumber = pageNumber;
+		}
+		public String getSearchGubun() {
+			if(searchGubun == null) {
+				searchGubun = "";
+			}
+			return searchGubun;
+		}
+		public void setSearchGubun(String searchGubun) {
+			
+			this.searchGubun = searchGubun;
+		}
+		public String getSearchData() {
+			if(searchData == null) {
+				searchData = "";
+			}
+			return searchData;
+		}
+		public void setSearchData(String searchData) {
+			
+			this.searchData = searchData;
+		}
+		
+		public String getPageNumber_() {
+			return pageNumber_;
+		}
+		public void setPageNumber_(String pageNumber_) {
+			this.pageNumber_ = pageNumber_;
+		}
+		public String getSearchQuery() {
+			String imsiSearchYN = "O";
+			if(getSearchGubun().equals("")||getSearchData().equals("")) {
+				imsiSearchYN = "X";
+				searchData ="";
+				searchGubun ="";
+			}
+			
+			searchQuery = "searchGubun=&searchData=";
+			if(imsiSearchYN.equals("O")) {
+				searchQuery = "&searchGubun="+searchGubun + "&searchData=" + searchData;
+			}
+			return searchQuery;
+		}
+		public void setSearchQuery(String searchQuery) {
+			if(searchQuery == null) {
+				searchQuery = "seachGubun=&searchData=";
+			}
+			this.searchQuery = searchQuery;
+		}
 		public MultipartFile getFile_1() {
 			return file_1;
 		}

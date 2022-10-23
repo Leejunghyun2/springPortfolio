@@ -2,6 +2,17 @@
     pageEncoding="UTF-8"%>
 <h2>${title }</h2>
 <%@ include file="../_include/inc_header.jsp" %>
+<div style="border: 0px solid red; padding-top: 0px; width: 80%;" align="left">
+<c:choose>
+	<c:when test="${dto.searchData == '' }">
+  		전체목록 : ${totalRecord } 건
+  	</c:when>
+  	<c:otherwise>
+  		검색어 '<font color="red" style="font-weight: bolder;">${dto.searchData }</font>'(으)로 검색한 목록 ${totalRecord }건
+  	</c:otherwise>
+</c:choose> 
+(${pageNumber } / ${totalPage })
+</div>
 <table border="1" width="80%">
 	<tr>
 		<td>상품이미지</td>
@@ -51,23 +62,96 @@
 </table>
 <div style="border: 0px solid red; padding-top: 20px; width: 80%;" align="right">
 		|
-		<a href="${path }/member/list">전체목록</a>
+		<a href="${path }/shopProduct/list">전체목록</a>
 		|
 		<a href="#" onclick="move('list','')">목록</a>
 		|
 		<a href="#" onclick="move('chuga','')">등록</a>
 		|
 </div>
+<c:if test="${totalRecord > 0 }">
+	<div style="border: 0px solid red; padding-top: 0px; width: 80%;" align="center">
+	<c:set var="totalBlock" value="${(totalPage / blockSize) - 1}"></c:set>
+	<c:set var="val1" value="${(totalPage / blockSize)}"></c:set>
+	<c:set var="val2" value="${(totalPage / blockSize)}"></c:set>
+	
+	<c:if test="${pageNumber > 1 }">
+		<a href="#" onclick="goPage('1');">[첫페이지]</a>
+	</c:if>
+	<c:if test="${pageNumber <= 1 }">
+		[첫페이지]
+	</c:if>
+	
+	
+	<c:if test="${block <= 0 }">
+	[이전${blockSize }개]
+	</c:if>
+	<c:if test="${block > 0 }">
+		<a href="#" onclick="goPage('${block * blockSize}')">[이전${blockSize }개]</a>
+	</c:if>
+	
+	
+		<c:forEach var="i" begin="1" end="${blockSize }" step="1" varStatus="status">
+			<c:set var="imsiValue" value="${block * blockSize + i}"/>
+			<c:if test="${totalPage - imsiValue >= 0 }">
+				<c:if test="${imsiValue == pageNumber }">
+					[${imsiValue }]
+				</c:if>
+				<c:if test="${imsiValue != pageNumber }">
+					<a href="#" onclick="goPage('${imsiValue}');">[${imsiValue }]</a>
+				</c:if>
+			</c:if>
+		</c:forEach>
+		
+		
+	<c:if test="${block < totalBlock }">
+		<a href="#" onclick="goPage('${block * blockSize + blockSize + 1}');">[다음${blockSize }개]</a>
+	</c:if>
+	<c:if test="${block >= totalBlock }">
+		[다음${blockSize }개]
+	</c:if>
+	
+	
+	<c:if test="${pageNumber >= totalPage }">
+		[끝페이지]
+	</c:if>
+	<c:if test="${pageNumber < totalPage }">
+		<a href="#" onclick="goPage('${totalPage}');">[끝페이지]</a>
+	</c:if>
+	
+	
+	</div>
+</c:if>
+
 <script>
+
 	function search() {
 	    document.searchForm.action="${path}/shopProduct/search";
 	    document.searchForm.method="post";
 	    document.searchForm.submit();
 	 }
+	function move(val1, val2){
+		location.href = '${path }/shopProduct/' + val1 + '?productCode_=' + val2 + '&pageNumber_=${dto.pageNumber_}&${dto.searchQuery}';
+	}
 	function goPage(val1){
 		location.href = '${path }/shopProduct/list?pageNumber_='+ val1 +'&${dto.searchQuery}';
-	}
-	function move(val1, val2){
-		location.href = '${path }/shopProduct/' + val1 + '?productCode_=' + val2;
-	}
+		/*	$.ajax({
+			type	: "POST",
+			url	    : "${path}/shopProduct/list",
+			data	: {	
+				'pageNumber_'		: val1,
+				'searchGubun' : '',
+				'searchData' : '',
+			},
+			
+			success : function(result) {
+				page = val1;
+				//update board fromd data
+				$("#result").html(result);
+			},
+			error : function(e) {
+			console.log(e);
+			}
+		});*/
+	} 
 </script>

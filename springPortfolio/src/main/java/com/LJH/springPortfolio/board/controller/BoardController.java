@@ -36,10 +36,11 @@ public class BoardController {
 		String title = "게시판목록";
 	
 		System.out.println(dto.getTbl());
+		model.addAttribute("tbl",dto.getTbl());
 		int pageNumber = util.getNumberCheck(dto.getPageNumber_(),1);
 		int pageSize = 5;
 		int blockSize = 5;
-
+		
 		
 
 		int totalRecord = dao.getTotalRecord(dto);
@@ -73,6 +74,7 @@ public class BoardController {
 		model.addAttribute("title",title);
 		model.addAttribute("fileName",fileName);
 		model.addAttribute("folderName",folderName);
+		
 		
 		return "main/main";
 	}
@@ -156,6 +158,8 @@ public class BoardController {
 		String title = "게시글상세보기";
 		
 		String fileName = "view";
+		
+		dao.setUpdateHit(dto);
 		dto = dao.getSelectOne(dto);
 		dto.setContent(dto.getContent().replace("\n", "<br>"));
 		dto.setSearchData(searchData);
@@ -204,13 +208,14 @@ public class BoardController {
 		dto = dao.getSelectOne(dto);
 		if(noticeGubun.equals("T")) {
 			if(dto.getNoticeNo() <= 0) {
-				dto.setNoticeNo(dao.getMaxValue("noticeNo"));
+				dto.setNoticeNo(dao.getMaxValue("noticeNo")+1);
 			}
 		} else {
 			if(dto.getNoticeNo() > 0 ) {
 				dto.setNoticeNo(0);
 			}
 		}
+		System.out.println(dto.getNoticeNo());
 		dto.setWriter(writer);
 		dto.setEmail(email);
 		dto.setSubject(subject);
@@ -239,7 +244,7 @@ public class BoardController {
 		model.addAttribute("fileName", fileName);
 		model.addAttribute("folderName", folderName);
 		model.addAttribute("dto",dto);
-		return "redirect:/board/list?"+dto.getSearchQuery();
+		return "redirect:/board/list?tbl="+dto.getTbl()+"&"+dto.getSearchQuery();
 	}
 	
 	@RequestMapping("/sakje")

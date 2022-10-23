@@ -33,16 +33,43 @@ public class ProductController {
 	String folderName = "shopProduct";
 	
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(Model model,ProductDTO dto,Util util) {
 		String fileName = "list";
 		String title = "상품목록";
-		List<ProductDTO> list = productDao.getSelectAll();
+		
+		int pageNumber = util.getNumberCheck(dto.getPageNumber_(),1);
+		
+		int pageSize = 1;
+		int blockSize = 5;
+
+
+ 
+		int totalRecord = productDao.getTotalRecord(dto);
+		int block = (pageNumber - 1) / blockSize;
+		int jj = totalRecord - pageSize * (pageNumber - 1);
+
+		double totalPageDou = Math.ceil(totalRecord / (double) pageSize);
+		int totalPage = (int) totalPageDou;
+
+		int startRecord = pageSize * (pageNumber - 1) + 1;
+		int lastRecord = pageSize * pageNumber;
+		int totalBlock = totalPage / blockSize;
+		dto.setStartRecord(startRecord);
+		dto.setLastRecord(lastRecord);
+		List<ProductDTO> list = productDao.getSelectAll(dto);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("totalRecord", totalRecord);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNumber", pageNumber);
+		model.addAttribute("blockSize", blockSize);
+		model.addAttribute("block", block);
+		model.addAttribute("jj", jj);
 		
 		model.addAttribute("list",list);
 		model.addAttribute("title",title);
 		model.addAttribute("folderName",folderName);
 		model.addAttribute("fileName",fileName);
-		
+		model.addAttribute("dto",dto);
 		return "main/main";
 	}
 	

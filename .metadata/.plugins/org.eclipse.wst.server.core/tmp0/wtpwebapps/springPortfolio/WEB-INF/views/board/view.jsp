@@ -49,6 +49,10 @@
 			</c:choose>
 		</td>
 	</tr>
+	<tr>
+	 <td>조회수</td>
+	 <td>${dto.hit }</td>
+	</tr>
 </table>
 <div style="border: 0px solid red; padding-top: 20px; width: 80%;" align="left">
 	<table>

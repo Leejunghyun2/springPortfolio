@@ -22,6 +22,7 @@
 		<tr>
 			<td colspan="2">
 			<button type="button" onclick="login();">로그인</button>
+			<button type="button" onclick="location.href='${path}/member/chuga'">회원가입</button>
 			</td>
 		</tr>
 	

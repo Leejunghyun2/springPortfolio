@@ -74,6 +74,14 @@ public class MemberDTO {
 	public void setNxtName(String nxtName) {
 		this.nxtName = nxtName;
 	}
+	public String getNo_() {
+		return no_;
+	}
+	public void setNo_(String no_) {
+		Util util = new Util();
+		this.no = util.getNumberCheck(no_, 0);
+		this.no_ = util.getNumberCheck(no_, 0) + "";
+	}
 	public String getSearchGubun() {
 		if(searchGubun == null) {
 			searchGubun = "";
@@ -93,14 +101,6 @@ public class MemberDTO {
 	public void setSearchData(String searchData) {
 		
 		this.searchData = searchData;
-	}
-	public String getNo_() {
-		return no_;
-	}
-	public void setNo_(String no_) {
-		Util util = new Util();
-		this.no = util.getNumberCheck(no_, 0);
-		this.no_ = util.getNumberCheck(no_, 0) + "";
 	}
 	
 	public String getPageNumber_() {

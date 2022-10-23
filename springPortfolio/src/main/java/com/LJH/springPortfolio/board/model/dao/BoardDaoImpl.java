@@ -62,5 +62,10 @@ public class BoardDaoImpl implements BoardDAO {
 	public void setUpdateReLevelNo(BoardDTO paramDto) {
 		session.update("board.setUpdateReLevelNo",paramDto);
 	}
+	
+	@Override
+	public void setUpdateHit(BoardDTO paramDto) {
+		session.update("board.setUpdateHit",paramDto);
+	}
 
 }

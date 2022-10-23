@@ -1,0 +1,149 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<h2>${title }</h2>
+<%@ include file="../_include/inc_header.jsp" %>
+<div style="border: 0px solid red; padding-top: 0px; width: 80%;" align="left">
+<c:choose>
+	<c:when test="${dto.searchData == '' }">
+  		전체목록 : ${totalRecord } 건
+  	</c:when>
+  	<c:otherwise>
+  		검색어 '<font color="red" style="font-weight: bolder;">${dto.searchData }</font>'(으)로 검색한 목록 ${totalRecord }건
+  	</c:otherwise>
+</c:choose> 
+(${pageNumber } / ${totalPage })
+</div>
+<table border="1" width="80%">
+	<tr>
+		<td>상품이미지</td>
+		<td>상품이름</td>
+		<td>상품가격</td>
+		<td>제조사이름</td>
+		<td>등록일</td>
+		<td>비고</td>
+	</tr>
+	<c:forEach var="productList" items="${list }">
+	<c:set var="attachArray" value="${fn:split(productList.attachInfo, '|') }"></c:set>
+	<c:set var="length" value="${fn:length(attachArray) }"></c:set>
+	<c:set var="counter" value="0"></c:set>
+		<tr>
+			<td align="center">
+				<c:choose>
+					<c:when test="${productList.attachInfo == '-|-|-' }">
+						[사진없음]
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="n" begin="0" end="${length - 1 }">
+							<c:if test="${counter == 0 }">
+								<c:choose>
+									<c:when test="${attachArray[n] == '-'}"></c:when>
+									<c:otherwise>
+										<c:set var="imgArray" value="${fn:split(attachArray[n],',') }"></c:set>
+											<img src="${path }/attach${path}/product/${imgArray[1] }" alt="" style="width: 100px; height: 100px;"></img>
+										<c:set var="counter" value="${counter + 1 }"></c:set>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>			
+			</td>
+			<td>${productList.productName }</td>
+			<td>${productList.productPrice }</td>
+			<td>${productList.vendorName }</td>
+			<td>${productList.regiDate }</td>
+			<td>
+				<a href="#" onclick="move('sujung','${productList.productCode}');">[수정]</a>
+				<a href="#" onclick="move('sakje','${productList.productCode}');">[삭제]</a>
+			</td>
+		</tr>	
+	</c:forEach>
+	
+</table>
+<div style="border: 0px solid red; padding-top: 20px; width: 80%;" align="right">
+		|
+		<a href="${path }/member/list">전체목록</a>
+		|
+		<a href="#" onclick="move('list','')">목록</a>
+		|
+		<a href="#" onclick="move('chuga','')">등록</a>
+		|
+</div>
+<c:if test="${totalRecord > 0 }">
+	<div style="border: 0px solid red; padding-top: 0px; width: 80%;" align="center">
+	<c:set var="totalBlock" value="${(totalPage / blockSize) - 1}"></c:set>
+	<c:set var="val1" value="${(totalPage / blockSize)}"></c:set>
+	<c:set var="val2" value="${(totalPage / blockSize)}"></c:set>
+	
+	<c:if test="${pageNumber > 1 }">
+		<a href="#" onclick="goPage('1');">[첫페이지]</a>
+	</c:if>
+	<c:if test="${pageNumber <= 1 }">
+		[첫페이지]
+	</c:if>
+	
+	
+	<c:if test="${block <= 0 }">
+	[이전${blockSize }개]
+	</c:if>
+	<c:if test="${block > 0 }">
+		<a href="#" onclick="goPage('${block * blockSize}')">[이전${blockSize }개]</a>
+	</c:if>
+	
+	
+		<c:forEach var="i" begin="1" end="${blockSize }" step="1" varStatus="status">
+			<c:set var="imsiValue" value="${block * blockSize + i}"/>
+			<c:if test="${totalPage - imsiValue >= 0 }">
+				<c:if test="${imsiValue == pageNumber }">
+					[${imsiValue }]
+				</c:if>
+				<c:if test="${imsiValue != pageNumber }">
+					<a href="#" onclick="goPage('${imsiValue}');">[${imsiValue }]</a>
+				</c:if>
+			</c:if>
+		</c:forEach>
+		
+		
+	<c:if test="${block < totalBlock }">
+		<a href="#" onclick="goPage('${block * blockSize + blockSize + 1}');">[다음${blockSize }개]</a>
+	</c:if>
+	<c:if test="${block >= totalBlock }">
+		[다음${blockSize }개]
+	</c:if>
+	
+	
+	<c:if test="${pageNumber >= totalPage }">
+		[끝페이지]
+	</c:if>
+	<c:if test="${pageNumber < totalPage }">
+		<a href="#" onclick="goPage('${totalPage}');">[끝페이지]</a>
+	</c:if>
+	
+	
+	</div>
+</c:if>
+<script>
+	function search() {
+	    document.searchForm.action="${path}/shopProduct/search";
+	    document.searchForm.method="post";
+	    document.searchForm.submit();
+	 }
+	function goPage(val1){
+		var param = {
+				"pageNumber_": val1,
+				"searchQuery": ${dto.searchQuery}
+		}
+		$.ajax({
+			var url='${path}/shopMall/list';
+			type: "post",
+			data: param,
+			url: url,
+			success: function(data) {
+					alert("성공");
+			}
+		});
+	}
+	function move(val1, val2){
+		location.href = '${path }/shopProduct/' + val1 + '?productCode_=' + val2 + '&pageNumber_=${dto.pageNumber_}&${dto.searchQuery}';
+	}
+</script>

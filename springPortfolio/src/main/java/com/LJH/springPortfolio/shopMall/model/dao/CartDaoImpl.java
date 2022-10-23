@@ -35,4 +35,12 @@ public class CartDaoImpl implements CartDAO {
 
 
 
+	@Override
+	public List<CartDTO> getSelectCartProductGroup() {
+		
+		return session.selectList("cart.getSelectCartProductGroup");
+	}
+
+
+
 }

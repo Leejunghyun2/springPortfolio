@@ -70,6 +70,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="getLogin" resultType="com.LJH.springPortfolio.member.model.dto.MemberDTO">
-		select no,name from member where id = #{id} and passwd = #{passwd}
+		select no, name, email1, email2 from member where id = #{id} and passwd = #{passwd}
 	</select>
 </mapper>

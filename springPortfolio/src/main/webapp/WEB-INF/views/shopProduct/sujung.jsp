@@ -3,7 +3,10 @@
 <h2>${title }</h2>
 <%@ include file="../_include/inc_header.jsp" %>
 <form name="DirForm">
-<input type="text" name="productCode_" value="${dto.productCode }">
+<input type="hidden" name="productCode_" value="${dto.productCode }">
+<input type="hidden" name="searchGubun" value="${dto.searchGubun }">
+<input type="hidden" name="searchData" value="${dto.searchData }">
+<input type="hidden" name="pageNumber_" value="1">
 <table border="1">
 	<tr>
 		<td>상품이름</td>

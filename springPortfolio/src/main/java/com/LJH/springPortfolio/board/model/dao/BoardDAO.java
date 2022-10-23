@@ -14,4 +14,5 @@ public interface BoardDAO {
 	public int setDelete(BoardDTO paramDto);
 	public int getMaxValue(String str);
 	public void setUpdateReLevelNo(BoardDTO paramDto);
+	public void setUpdateHit(BoardDTO paramDto);
 }

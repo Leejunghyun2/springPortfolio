@@ -12,7 +12,7 @@
 <table border="1" width="80%">
 	<tr>
 		<td style="padding:20px 20px;">
-		<jsp:include page="../_include/inc_menu.jsp" />
+		<%@ include file="../_include/inc_menu.jsp" %>
 	</tr>
 	<tr>
 		<td style="padding:20px 20px;" align="center">

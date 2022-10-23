@@ -69,7 +69,7 @@
 		    <version>${org.springframework-version}</version><!-- 현재 스프링 버전에 맞게 연동 -->
 		</dependency>
 		
-	   
+	    
 	
 		<!-- oracle driver -->
         <!-- https://mvnrepository.com/artifact/com.oracle.jdbc/ojdbc6 -->
@@ -95,7 +95,13 @@
         </dependency>
 		
 	
-	
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+	<dependency>
+    	<groupId>org.json</groupId>
+    	<artifactId>json</artifactId>
+    	<version>20220320</version>
+	</dependency>
+		
 	
 	
 	
@@ -170,7 +176,8 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-
+		
+		
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>

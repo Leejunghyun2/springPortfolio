@@ -22,10 +22,19 @@ private int memberNo;
 
 <select id="getSelectAll" resultType="com.LJH.springPortfolio.shopMall.model.dto.CartDTO">
 	select c.* , (select productName || '/' || productPrice || '/' || (select vendorName from vendor V where p.vendorCode = V.vendorCode ) from product p where p.productCode = c.productCode) productInfo
-	, (select attachInfo from product p where p.productCode = c.productCode) attachInfo  
+	, (select attachInfo from product p where p.productCode = c.productCode) attachInfo,
+	(select productName  from product p where p.productCode = c.productCode) productName  
 	from cart c
 	order by cartNo desc
 </select>
+
+<select id="getSelectCartProductGroup" resultType="com.LJH.springPortfolio.shopMall.model.dto.CartDTO">
+	select p.productName, sum(c.amount * p.productPrice) buyMoney
+	from cart c inner join product p on c.productCode = p.productCode
+	group by p.productName
+	order by productName asc
+</select>
+
 <insert id="setInsert">
 	insert into cart
 	values(seq_cart.nextval, #{memberNo}, #{productCode}, #{amount}, sysdate)

@@ -15,6 +15,8 @@ public class CartDTO {
 	private int productCode;
 	private String productCode_;
 	
+	private String productName;
+	
 	private int amount;
 	private Date regiDate;
 	
@@ -24,7 +26,22 @@ public class CartDTO {
 	private String attachInfo;
 
 	private String vendorName;
+	private int buyMoney;
 	
+	public int getBuyMoney() {
+		return buyMoney;
+	}
+	public void setBuyMoney(int buyMoney) {
+		this.buyMoney = buyMoney;
+	}
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
 	public String getAttachInfo() {
 		return attachInfo;
 	}

@@ -9,8 +9,7 @@
 			<td>
 				<input type="text" name="id" id="id">
 				<input type="hidden" name="tempId" id="tempId">
-				<button type="button" onclick="idCheck();">아이디찾기</button>
-				<button type="button" onclick="idCheckWin();">아이디찾기(새창)</button>
+				<button type="button" onclick="idCheck();">중복체크</button>
 				<br>
 				<label id="label_id"></label>
 			</td>
@@ -132,9 +131,6 @@
 				}
 			}
 		});
-	}
-	function idCheckWin(){
-		window.open("${path}/member/idCheckWin","idCheckWin","width=600, height=210, tollbar=no, menubar=no, scrollbars=no, resizable=yes");
 	}
 </script>	
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -46,8 +46,21 @@
 		</td>
 		<td style="padding: 0px 10px;" id="shopCart">
 			<a href="${path }/shopCart/list">장바구니</a>
-		</td>
 	</tr>
 </table>
-
+<c:set var="choice" value="index"></c:set>
+<c:choose>
+	<c:when test="${tbl == null || tbl == '' }">
+		<c:set var="choice" value="${folderName }"></c:set>
+	</c:when>
+	<c:otherwise>
+		<c:set var="choice" value="${tbl }"></c:set>
+	</c:otherwise>
+</c:choose>
+<script>
+function choiceMenuId(){
+	$("#${choice}").css('background-color','gray');
+}
+choiceMenuId();
+</script>
     

@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>index.jsp</h2>
-	<h2>path : / ${path }</h2>
 	
+	<jsp:include page="../chart/dbChart.jsp" flush="true"></jsp:include>
 	
-	<a href="${path }/member/list">[Go!!!]</a>
+	<a href="${path }/member/login">[로그인]</a>
+	<a href="${path }/member/chuga">[회원가입]</a>
 </body>
 </html>

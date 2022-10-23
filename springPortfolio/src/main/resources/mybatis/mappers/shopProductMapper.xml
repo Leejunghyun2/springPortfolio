@@ -4,10 +4,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
  	<select id="getSelectAll" resultType="com.LJH.springPortfolio.shopMall.model.dto.ProductDTO">
- 		select P.*, (select vendorName from vendor V where P.vendorCode = V.vendorCode ) vendorName 
- 		from product P 
- 		order by productCode desc
+ 	
+ 		select * from (select A.*, Rownum rnum from (
+			
+		select P.*, (select vendorName from vendor V where P.vendorCode = V.vendorCode ) vendorName 
+ 		from product P
+	<![CDATA[	
+			order by productCode desc
+		) A) where rnum >= #{startRecord} and rnum <= #{lastRecord}
+	]]>
+ 	
  	</select>
+ 	
+ 	<select id="getTotalRecord" resultType="int">
+		select count(*) from product where 1 = 1
+			
+		
+	</select>
+ 	
  	<select id="getSelectOne" resultType="com.LJH.springPortfolio.shopMall.model.dto.ProductDTO">
  		select P.*, (select vendorName from vendor V where P.vendorCode = V.vendorCode ) vendorName 
  		from product P 

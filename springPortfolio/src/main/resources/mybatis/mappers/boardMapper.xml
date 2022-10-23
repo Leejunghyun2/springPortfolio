@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from board where 1 = 1
 		<choose>
 			<when test="tbl != null and tbl != ''">
-				and tbl = #{tbl}
+				and (tbl = #{tbl} or noticeNo > 0)
 			</when>
 			<otherwise>
 				
@@ -84,6 +84,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="setUpdateReLevelNo">
 		update board set levelNo = (levelNo + 1) where refNo = #{refNo} and levelNo > #{levelNo}
+	</update>
+	
+	<update id="setUpdateHit">
+		update board set hit = (hit + 1) where no = #{no} 
 	</update>
 	
 	<delete id="setDelete">

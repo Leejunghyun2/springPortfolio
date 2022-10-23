@@ -16,20 +16,12 @@
 	<table border="1" width="80%">
 		<tr>
 			<th>순번</th>
-			<th>tbl</th>
+			<th>게시판종류</th>
 			<th>작성자</th>
 			<th>제목</th>
 			<th>이메일</th>
 			<th>조회수</th>
 			<th>등록일</th>
-			<th>refNo</th>
-			<th>stepNo</th>
-			<th>levelNo</th>
-			<th>parentNo</th>
-			<th>memberNo</th>
-			<th>noticeNo</th>
-			<th>ip</th>
-			<th>secretGubun</th>
 		</tr>
 		<c:if test="${totalRecord == 0 }">
 		<tr>
@@ -56,14 +48,6 @@
 				<td>${boardDto.email }</td>
 				<td>${boardDto.hit }</td>
 				<td>${boardDto.regiDate}</td>
-				<td>${boardDto.refNo }</td>
-				<td>${boardDto.stepNo }</td>
-				<td>${boardDto.levelNo }</td>
-				<td>${boardDto.parentNo }</td>
-				<td>${boardDto.memberNo }</td>
-				<td>${boardDto.noticeNo }</td>
-				<td>${boardDto.ip }</td>
-				<td>${boardDto.secretGubun }</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -155,6 +139,6 @@
 		location.href = '${path }/board/' + val1 + '?tbl=${dto.tbl}&no_=' + val2 +"&pageNumber_=${dto.pageNumber_}&${dto.searchQuery}";
 	}
 	function goPage(val1){
-		location.href = '${path }/board/list?pageNumber_='+ val1 +'&${dto.searchQuery}';
+		location.href = '${path }/board/list?tbl=${dto.tbl}&pageNumber_='+ val1 +'&${dto.searchQuery}';
 	}
 </script>
